@@ -52,34 +52,35 @@ Commands involve :
 
 output :
 
-NAME                                     READY   STATUS    RESTARTS   AGE
-pod/db-b54cd94f4-ntqpb                   1/1     Running   0          42h
-pod/redis-868d64d78-xpr4p                1/1     Running   0          42h
-pod/result-5d57b59f4b-5q28v              1/1     Running   0          42h
-pod/vote-94849dc97-nd7ph                 1/1     Running   0          42h
-pod/worker-dd46d7584-wwchb               1/1     Running   1          42h
+[root@ip-172-31-11-125 k8s-specifications]# kubectl get all
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/db-b54cd94f4-dbf9h        0/1     Pending   0          17s
+pod/redis-868d64d78-kt8kx     0/1     Pending   0          16s
+pod/result-5d57b59f4b-d5rql   0/1     Pending   0          16s
+pod/vote-94849dc97-xlz69      0/1     Pending   0          16s
+pod/worker-dd46d7584-dxfxv    0/1     Pending   0          16s
 
-NAME                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-service/db                   ClusterIP   10.100.150.162   <none>        5432/TCP         42h
-service/kubernetes           ClusterIP   10.96.0.1        <none>        443/TCP          42h
-service/redis                ClusterIP   10.106.245.58    <none>        6379/TCP         42h
-service/result               NodePort    10.98.21.83      <none>        5001:31001/TCP   42h
-service/vote                 NodePort    10.100.81.185    <none>        5000:31000/TCP   42h
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/db           ClusterIP   10.104.178.233   <none>        5432/TCP         17s
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          8d
+service/redis        ClusterIP   10.99.244.215    <none>        6379/TCP         16s
+service/result       NodePort    10.111.67.151    <none>        5001:31001/TCP   16s
+service/vote         NodePort    10.103.68.124    <none>        5000:31000/TCP   16s
 
-NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/db                   1/1     1            1           42h
-deployment.apps/redis                1/1     1            1           42h
-deployment.apps/result               1/1     1            1           42h
-deployment.apps/vote                 1/1     1            1           42h
-deployment.apps/worker               1/1     1            1           42h
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/db       0/1     1            0           17s
+deployment.apps/redis    0/1     1            0           17s
+deployment.apps/result   0/1     1            0           16s
+deployment.apps/vote     0/1     1            0           16s
+deployment.apps/worker   0/1     1            0           16s
 
-NAME                                           DESIRED   CURRENT   READY   AGE
-replicaset.apps/db-b54cd94f4                   1         1         1       42h
-replicaset.apps/redis-868d64d78                1         1         1       42h
-replicaset.apps/result-5d57b59f4b              1         1         1       42h
-replicaset.apps/vote-94849dc97                 1         1         1       42h
-replicaset.apps/worker-dd46d7584               1         1         1       42h
-[root@ip-172-31-10-134 k8s-specifications]#
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/db-b54cd94f4        1         1         0       17s
+replicaset.apps/redis-868d64d78     1         1         0       17s
+replicaset.apps/result-5d57b59f4b   1         1         0       16s
+replicaset.apps/vote-94849dc97      1         1         0       16s
+replicaset.apps/worker-dd46d7584    1         1         0       16s
+[root@ip-172-31-11-125 k8s-specifications]#
 
 ###########################################################################################
 Open browser and go the follwing URL 
@@ -90,24 +91,24 @@ http://18.140.196.252:31001 to view the results of the voting
 ############################################################################################
 Deleting the voting pod:
     
-[root@ip-172-31-10-134 k8s-specifications]# kubectl get po
-NAME                                 READY   STATUS    RESTARTS   AGE
-db-b54cd94f4-ntqpb                   1/1     Running   0          2d10h
-redis-868d64d78-xpr4p                1/1     Running   0          2d10h
-result-5d57b59f4b-5q28v              1/1     Running   0          2d10h
-vote-94849dc97-nd7ph                 1/1     Running   0          2d10h
-worker-dd46d7584-wwchb               1/1     Running   1          2d10h
+[root@ip-172-31-11-125 k8s-specifications]# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-b54cd94f4-dbf9h        0/1     Pending   0          8m51s
+redis-868d64d78-kt8kx     0/1     Pending   0          8m50s
+result-5d57b59f4b-d5rql   0/1     Pending   0          8m50s
+vote-94849dc97-xlz69      0/1     Pending   0          8m50s
+worker-dd46d7584-dxfxv    0/1     Pending   0          8m50s
 
-[root@ip-172-31-10-134 k8s-specifications]# kubectl delete pod vote-94849dc97-nd7ph
-pod "vote-94849dc97-nd7ph" deleted
+[root@ip-172-31-11-125 k8s-specifications]# kubectl delete pod vote-94849dc97-xlz69
+pod "vote-94849dc97-xlz69" deleted
 
-[root@ip-172-31-10-134 k8s-specifications]# kubectl get po
-NAME                                 READY   STATUS    RESTARTS   AGE
-db-b54cd94f4-ntqpb                   1/1     Running   0          2d10h
-redis-868d64d78-xpr4p                1/1     Running   0          2d10h
-result-5d57b59f4b-5q28v              1/1     Running   0          2d10h
-vote-94849dc97-qccjd                 1/1     Running   0          18s
-worker-dd46d7584-wwchb               1/1     Running   1          2d10h
+[root@ip-172-31-11-125 k8s-specifications]# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-b54cd94f4-dbf9h        0/1     Pending   0          9m38s
+redis-868d64d78-kt8kx     0/1     Pending   0          9m37s
+result-5d57b59f4b-d5rql   0/1     Pending   0          9m37s
+vote-94849dc97-mxngf      0/1     Pending   0          21s
+worker-dd46d7584-dxfxv    0/1     Pending   0          9m37s
 
 Observation-> Here as we can see the voting pod is deleted there is new voting pod created as this pod is replica. The application has no impact because of the voting pod deletion.
  
@@ -115,24 +116,24 @@ Observation-> Here as we can see the voting pod is deleted there is new voting p
  
 Deleting the Worker Pod:
 
-[root@ip-172-31-10-134 k8s-specifications]# kubectl get po
-NAME                                 READY   STATUS    RESTARTS   AGE
-db-b54cd94f4-ntqpb                   1/1     Running   0          2d10h
-redis-868d64d78-xpr4p                1/1     Running   0          2d10h
-result-5d57b59f4b-5q28v              1/1     Running   0          2d10h
-vote-94849dc97-m7x2p                 1/1     Running   0          56s
-worker-dd46d7584-wwchb               1/1     Running   1          2d10h
+[root@ip-172-31-11-125 k8s-specifications]# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-b54cd94f4-dbf9h        0/1     Pending   0          9m38s
+redis-868d64d78-kt8kx     0/1     Pending   0          9m37s
+result-5d57b59f4b-d5rql   0/1     Pending   0          9m37s
+vote-94849dc97-mxngf      0/1     Pending   0          21s
+worker-dd46d7584-dxfxv    0/1     Pending   0          9m37s
 
-[root@ip-172-31-10-134 k8s-specifications]# kubectl delete pod worker-dd46d7584-wwchb
-pod "worker-dd46d7584-wwchb" deleted
+[root@ip-172-31-11-125 k8s-specifications]# kubectl delete pod worker-dd46d7584-dxfxv
+pod "worker-dd46d7584-dxfxv" deleted
 
-[root@ip-172-31-10-134 k8s-specifications]# kubectl get po
-NAME                                 READY   STATUS    RESTARTS   AGE
-db-b54cd94f4-ntqpb                   1/1     Running   0          2d10h
-redis-868d64d78-xpr4p                1/1     Running   0          2d10h
-result-5d57b59f4b-5q28v              1/1     Running   0          2d10h
-vote-94849dc97-m7x2p                 1/1     Running   0          113s
-worker-dd46d7584-wlnwb               1/1     Running   0          39s
+[root@ip-172-31-11-125 k8s-specifications]# kubectl get po
+NAME                      READY   STATUS    RESTARTS   AGE
+db-b54cd94f4-dbf9h        0/1     Pending   0          10m
+redis-868d64d78-kt8kx     0/1     Pending   0          10m
+result-5d57b59f4b-d5rql   0/1     Pending   0          10m
+vote-94849dc97-mxngf      0/1     Pending   0          63s
+worker-dd46d7584-zdn99    0/1     Pending   0          2s
 
 Observation: - A new pod is created as it is a replica , Voting app can be excessed and the flow is also not disturbed , all the other app (voting,redis,dp,result) worked fine
 
@@ -140,7 +141,7 @@ Observation: - A new pod is created as it is a replica , Voting app can be exces
 
 Deleting the DB pod
   
-kubectl delete pod db-b54cd94f4-ntqpb
+kubectl delete pod db-b54cd94f4-dbf9h 
 kubectl get pod
   
 Observation:
